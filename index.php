@@ -24,6 +24,7 @@ class n138 {
 		$this->exit_params[$key] = $val;
 	}
 }
+ini_set('upload_max_filesize', '25M');
 header('Content-Type: text/plain');
 $exitStatus = new n138();
 $exitStatus->setVal('time', time());
