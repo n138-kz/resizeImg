@@ -39,7 +39,7 @@ if( mb_strtolower($_SERVER['REQUEST_METHOD']) != 'post' ){
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
-	echo json_encode($exitStatus->getExitStatus());
+	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
 	error_log(json_encode($exitStatus->getExitStatus()));
 	exit();
 }
@@ -52,7 +52,7 @@ if ( !isset($_POST) || !is_array($_POST) ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
-	echo json_encode($exitStatus->getExitStatus());
+	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
 	error_log(json_encode($exitStatus->getExitStatus()));
 	exit();
 }
@@ -65,7 +65,7 @@ if ( !isset($_FILES['image']) ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
-	echo json_encode($exitStatus->getExitStatus());
+	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
 	error_log(json_encode($exitStatus->getExitStatus()));
 	exit();
 }
@@ -107,7 +107,7 @@ if ( !isset($_FILES['image']['error']) || $_FILES['image']['error'] != 0 ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
-	echo json_encode($exitStatus->getExitStatus());
+	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
 	error_log(json_encode($exitStatus->getExitStatus()));
 	exit();
 }
@@ -120,7 +120,7 @@ if ( !isset($_FILES['image']['error']) || $_FILES['image']['size'] == 0 ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
-	echo json_encode($exitStatus->getExitStatus());
+	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
 	error_log(json_encode($exitStatus->getExitStatus()));
 	exit();
 }
@@ -133,7 +133,7 @@ if ( !file_exists($_FILES['image']['tmp_name']) ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
-	echo json_encode($exitStatus->getExitStatus());
+	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
 	error_log(json_encode($exitStatus->getExitStatus()));
 	exit();
 }
