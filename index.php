@@ -174,7 +174,7 @@ try {
 		$image_meta['size']['src_h']
 	);
 
-	var_dump([$image_meta, $baseImage]);
+	header('Content-Type: image/png');
 	imagepng($image);
 	imagedestroy($baseImage);
 	imagedestroy($image);
