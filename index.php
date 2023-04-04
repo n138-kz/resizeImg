@@ -145,4 +145,4 @@ try {
 } catch (Exception $e) {
 	var_dump($e);
 }
-var_dump([$_POST, $_FILES]);
+echo json_encode([$_POST, $_FILES], JSON_PRETTY_PRINT);
