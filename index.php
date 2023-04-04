@@ -162,8 +162,8 @@ try {
 	}
 	$image = imagecreatetruecolor($image_meta['size']['dst_w'], $image_meta['size']['dst_h']);
 	imagecopyresampled(
-		$canvas,
-		$source,
+		$image,
+		$baseImage,
 		0,
 		0,
 		0,
