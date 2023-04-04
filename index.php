@@ -141,6 +141,7 @@ if ( !file_exists($_FILES['image']['tmp_name']) ) {
 
 try {
 	list($image['size']['w'], $image['size']['h']) = getimagesize($_FILES['image']['tmp_name']);
+	$image['size']['b'] = $_FILES['image']['size'];
 	$baseImage = NULL;
 	if (FALSE) {
 	} elseif (mb_strtolower($_FILES['image']['type']) == 'image/png') {
