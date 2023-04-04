@@ -140,22 +140,46 @@ if ( !file_exists($_FILES['image']['tmp_name']) ) {
 }
 
 try {
-	list($image['size']['w'], $image['size']['h']) = getimagesize($_FILES['image']['tmp_name']);
-	$image['size']['b'] = $_FILES['image']['size'];
-	$image['size']['kb'] = $image['size']['b']/1000;
-	$image['size']['mb'] = $image['size']['kb']/1000;
+	list($image_meta['size']['src_w'], $image_meta['size']['src_h'], $image_meta['type']) = getimagesize($_FILES['image']['tmp_name']);
+	$image_meta['size']['dst_w'] = $image_meta['size']['src_w'] *0.8;
+	$image_meta['size']['dst_h'] = $image_meta['size']['src_h'] *0.8;
+	$image_meta['size']['b'] = $_FILES['image']['size'];
+	$image_meta['size']['kb'] = $image_meta['size']['b']/1000;
+	$image_meta['size']['mb'] = $image_meta['size']['kb']/1000;
 	$baseImage = NULL;
-	if (FALSE) {
-	} elseif (mb_strtolower($_FILES['image']['type']) == 'image/png') {
-		$baseImage = imagecreatefrompng($_FILES['image']['tmp_name']);
-	} elseif (mb_strtolower($_FILES['image']['type']) == 'image/jepg') {
-		$baseImage = imagecreatefromjpeg($_FILES['image']['tmp_name']);
-	} elseif (FALSE) {
-	} elseif (FALSE) {
+	switch ($image_meta['type']) {
+		case IMAGETYPE_JPEG:
+			$baseImage = imagecreatefromjpeg($_FILES['image']['tmp_name']);
+			break;
+		case IMAGETYPE_PNG:
+			$baseImage = imagecreatefrompng($_FILES['image']['tmp_name']);
+			break;
+		case IMAGETYPE_GIF:
+			$baseImage = imagecreatefromgif($_FILES['image']['tmp_name']);
+			break;
+		default:
+			break;
 	}
-	var_dump([$image, $baseImage]);
+	$image = imagecreatetruecolor($image_meta['size']['dst_w'], $image_meta['size']['dst_h']);
+	imagecopyresampled(
+		$canvas,
+		$source,
+		0,
+		0,
+		0,
+		0,
+		$image_meta['size']['dst_w'],
+		$image_meta['size']['dst_h'],
+		$image_meta['size']['src_w'],
+		$image_meta['size']['src_h']
+	);
+
+	var_dump([$image_meta, $baseImage]);
+	imagepng($image);
+	imagedestroy($baseImage);
+	imagedestroy($image);
 
 } catch (Exception $e) {
 	var_dump($e);
+	exit();
 }
-echo json_encode([$_POST, $_FILES], JSON_PRETTY_PRINT);
