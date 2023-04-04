@@ -141,7 +141,16 @@ if ( !file_exists($_FILES['image']['tmp_name']) ) {
 
 try {
 	list($image['size']['w'], $image['size']['h']) = getimagesize($_FILES['image']['tmp_name']);
-	var_dump($image);
+	$baseImage = NULL;
+	if (FALSE) {
+	} elseif (mb_strtolower($_FILES['image']['type']) == 'image/png') {
+		$baseImage = imagecreatefrompng($_FILES['image']['tmp_name']);
+	} elseif (mb_strtolower($_FILES['image']['type']) == 'image/jepg') {
+		$baseImage = imagecreatefromjpeg($_FILES['image']['tmp_name']);
+	} elseif (FALSE) {
+	} elseif (FALSE) {
+	}
+	var_dump([$image, $baseImage]);
 
 } catch (Exception $e) {
 	var_dump($e);
