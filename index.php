@@ -31,8 +31,10 @@ header('Content-Type: Application/json');
 $exitStatus = new n138();
 $exitStatus->setVal('time', time());
 $exitStatus->setVal('remote', ['address'=>$_SERVER['REMOTE_ADDR']]);
+$json_encode_option = 0;
 if( isset($_SERVER['HTTP_X_SCRIPT_DEBUG']) ){
 	$exitStatus->setVal('debug', (bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']));
+	$json_encode_option = JSON_PRETTY_PRINT;
 }
 define('DEBUG', $exitStatus->getVal('debug'));
 
@@ -44,7 +46,7 @@ if( mb_strtolower($_SERVER['REQUEST_METHOD']) != 'post' ){
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
-	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
+	echo json_encode($exitStatus->getExitStatus(), $json_encode_option);
 	if ( !DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
@@ -60,7 +62,7 @@ if ( !isset($_POST) || !is_array($_POST) ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
-	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
+	echo json_encode($exitStatus->getExitStatus(), $json_encode_option);
 	if ( !DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
@@ -76,7 +78,7 @@ if ( !isset($_FILES['image']) ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
-	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
+	echo json_encode($exitStatus->getExitStatus(), $json_encode_option);
 	if ( !DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
@@ -121,7 +123,7 @@ if ( !isset($_FILES['image']['error']) || $_FILES['image']['error'] != 0 ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
-	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
+	echo json_encode($exitStatus->getExitStatus(), $json_encode_option);
 	if ( !DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
@@ -137,7 +139,7 @@ if ( !isset($_FILES['image']['error']) || $_FILES['image']['size'] == 0 ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
-	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
+	echo json_encode($exitStatus->getExitStatus(), $json_encode_option);
 	if ( !DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
@@ -153,7 +155,7 @@ if ( !file_exists($_FILES['image']['tmp_name']) ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
-	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
+	echo json_encode($exitStatus->getExitStatus(), $json_encode_option);
 	if ( !DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
