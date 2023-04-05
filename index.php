@@ -41,6 +41,9 @@ if( mb_strtolower($_SERVER['REQUEST_METHOD']) != 'post' ){
 	}
 	
 	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
+	if ( !(bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
+	}
 	error_log(json_encode($exitStatus->getExitStatus()));
 	exit();
 }
@@ -54,6 +57,9 @@ if ( !isset($_POST) || !is_array($_POST) ) {
 	}
 	
 	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
+	if ( !(bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
+	}
 	error_log(json_encode($exitStatus->getExitStatus()));
 	exit();
 }
@@ -67,6 +73,9 @@ if ( !isset($_FILES['image']) ) {
 	}
 	
 	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
+	if ( !(bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
+	}
 	error_log(json_encode($exitStatus->getExitStatus()));
 	exit();
 }
@@ -109,6 +118,9 @@ if ( !isset($_FILES['image']['error']) || $_FILES['image']['error'] != 0 ) {
 	}
 	
 	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
+	if ( !(bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
+	}
 	error_log(json_encode($exitStatus->getExitStatus()));
 	exit();
 }
@@ -122,6 +134,9 @@ if ( !isset($_FILES['image']['error']) || $_FILES['image']['size'] == 0 ) {
 	}
 	
 	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
+	if ( !(bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
+	}
 	error_log(json_encode($exitStatus->getExitStatus()));
 	exit();
 }
@@ -135,6 +150,9 @@ if ( !file_exists($_FILES['image']['tmp_name']) ) {
 	}
 	
 	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
+	if ( !(bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
+	}
 	error_log(json_encode($exitStatus->getExitStatus()));
 	exit();
 }
