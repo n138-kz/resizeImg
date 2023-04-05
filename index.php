@@ -196,7 +196,6 @@ try {
 		$image_meta['size']['src_h']
 	);
 
-	$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	error_log(json_encode($exitStatus->getExitStatus()));
 
 	header('Content-Type: image/png');
