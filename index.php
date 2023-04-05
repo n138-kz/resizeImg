@@ -26,7 +26,7 @@ class n138 {
 }
 ini_set('upload_max_filesize', '25M');
 ini_set('post_max_size', '100M');
-header('Content-Type: text/plain');
+header('Content-Type: Application/json');
 $exitStatus = new n138();
 $exitStatus->setVal('time', time());
 $exitStatus->setVal('remote', ['address'=>$_SERVER['REMOTE_ADDR']]);
