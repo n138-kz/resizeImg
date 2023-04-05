@@ -182,6 +182,7 @@ try {
 			$baseImage = imagecreatefromgif($_FILES['image']['tmp_name']);
 			break;
 		default:
+			throw new ErrorException('Out of format.');
 			break;
 	}
 	$image = imagecreatetruecolor($image_meta['size']['dst_w'], $image_meta['size']['dst_h']);
@@ -206,6 +207,17 @@ try {
 	imagedestroy($image);
 
 } catch (Exception $e) {
-	var_dump($e);
+	http_response_code(400);
+	$exitStatus->setVal('time', time());
+	$exitStatus->setVal('text', $e->getMessage());
+	if ( DEBUG ) {
+		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
+	}
+	
+	echo json_encode($exitStatus->getExitStatus(), $json_encode_option);
+	if ( !DEBUG ) {
+		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
+	}
+	error_log(json_encode($exitStatus->getExitStatus()));
 	exit();
 }
