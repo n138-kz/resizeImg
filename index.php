@@ -4,8 +4,7 @@ require_once './vendor/autoload.php';
 class n138 {
 	private $exit_params;
 	function __construct(){
-		error_log('__construct');
-		$exit_params = [
+		$this->exit_params = [
 			'time' => time(),
 			'text' => '',
 			'code' => 0,
