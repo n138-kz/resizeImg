@@ -11,6 +11,7 @@ class n138 {
 			'remote' => [
 				'address' => '',
 			],
+			'debug' => FALSE,
 		];
 	}
 	function getExitStatus() {
@@ -30,18 +31,21 @@ header('Content-Type: Application/json');
 $exitStatus = new n138();
 $exitStatus->setVal('time', time());
 $exitStatus->setVal('remote', ['address'=>$_SERVER['REMOTE_ADDR']]);
-$exitStatus->setVal('debug', (bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']));
+if( isset($_SERVER['HTTP_X_SCRIPT_DEBUG']) ){
+	$exitStatus->setVal('debug', (bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']));
+}
+define('DEBUG', $exitStatus->getVal('text'));
 
 if( mb_strtolower($_SERVER['REQUEST_METHOD']) != 'post' ){
 	http_response_code(405);
 	$exitStatus->setVal('time', time());
 	$exitStatus->setVal('text', 'Method Not Allowed.');
-	if ( (bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+	if ( DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
 	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
-	if ( !(bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+	if ( !DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	error_log(json_encode($exitStatus->getExitStatus()));
@@ -52,12 +56,12 @@ if ( !isset($_POST) || !is_array($_POST) ) {
 	http_response_code(400);
 	$exitStatus->setVal('time', time());
 	$exitStatus->setVal('text', 'Bad Request.');
-	if ( (bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+	if ( DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
 	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
-	if ( !(bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+	if ( !DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	error_log(json_encode($exitStatus->getExitStatus()));
@@ -68,12 +72,12 @@ if ( !isset($_FILES['image']) ) {
 	http_response_code(400);
 	$exitStatus->setVal('time', time());
 	$exitStatus->setVal('text', 'Bad Request.');
-	if ( (bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+	if ( DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
 	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
-	if ( !(bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+	if ( !DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	error_log(json_encode($exitStatus->getExitStatus()));
@@ -113,12 +117,12 @@ if ( !isset($_FILES['image']['error']) || $_FILES['image']['error'] != 0 ) {
 	}
 	$exitStatus->setVal('text', $exitStatus->getVal('text') . ' ');
 	$exitStatus->setVal('text', $exitStatus->getVal('text') . 'Error-code: ' . $_FILES['image']['error']);
-	if ( (bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+	if ( DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
 	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
-	if ( !(bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+	if ( !DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	error_log(json_encode($exitStatus->getExitStatus()));
@@ -129,12 +133,12 @@ if ( !isset($_FILES['image']['error']) || $_FILES['image']['size'] == 0 ) {
 	http_response_code(500);
 	$exitStatus->setVal('time', time());
 	$exitStatus->setVal('text', 'File error');
-	if ( (bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+	if ( DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
 	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
-	if ( !(bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+	if ( !DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	error_log(json_encode($exitStatus->getExitStatus()));
@@ -145,12 +149,12 @@ if ( !file_exists($_FILES['image']['tmp_name']) ) {
 	http_response_code(500);
 	$exitStatus->setVal('time', time());
 	$exitStatus->setVal('text', 'Bad Request.');
-	if ( (bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+	if ( DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
 	echo json_encode($exitStatus->getExitStatus(), JSON_PRETTY_PRINT);
-	if ( !(bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']) ) {
+	if ( !DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	error_log(json_encode($exitStatus->getExitStatus()));
