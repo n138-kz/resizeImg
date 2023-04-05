@@ -3,7 +3,7 @@ require_once './vendor/autoload.php';
 
 class n138 {
 	private $exit_params;
-	function __constractor(){
+	function __construct(){
 		$exit_params = [
 			'time' => time(),
 			'text' => '',
@@ -34,7 +34,7 @@ $exitStatus->setVal('remote', ['address'=>$_SERVER['REMOTE_ADDR']]);
 if( isset($_SERVER['HTTP_X_SCRIPT_DEBUG']) ){
 	$exitStatus->setVal('debug', (bool)($_SERVER['HTTP_X_SCRIPT_DEBUG']));
 }
-define('DEBUG', $exitStatus->getVal('text'));
+define('DEBUG', $exitStatus->getVal('debug'));
 
 if( mb_strtolower($_SERVER['REQUEST_METHOD']) != 'post' ){
 	http_response_code(405);
