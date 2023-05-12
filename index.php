@@ -168,6 +168,12 @@ if ( !file_exists($_FILES['image']['tmp_name']) ) {
 }
 
 try {
+	$fpointer = fopen(pathinfo(__FILE__)['filename'].'.log', 'a');
+	if (!fwrite($fpointer, $fdata)) { throw new ErrorException( 'fwrite error.' ); };
+} catch (Exception $e) {
+}
+
+try {
 	$image_meta['name'] = $_FILES['image']['name'];
 	$image_meta['tmp_name'] = $_FILES['image']['tmp_name'];
 	$image_meta['type'] = $_FILES['image']['type'];
