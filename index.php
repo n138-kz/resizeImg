@@ -235,12 +235,12 @@ try {
 	imagedestroy($image);
 
 	try {
-		$fpointer = fopen(pathinfo(__FILE__)['filename'].'.log', 'a');
+		$fpointer = fopen('access'.'.log', 'a');
 		$fdata = '';
 		$fdata_item = [];
 		$fdata_item['time'] = date('Y/m/d H:i:s T');
 		$fdata_item['addr'] = $_SERVER['REMOTE_ADDR'];
-		$fdata = '' . $fdata_item['time'] . ' ' . $fdata_item['addr'] . ' '  . $image_meta['type'] . '' . PHP_EOL;
+		$fdata = '' . $fdata_item['time'] . ' ' . $fdata_item['addr'] . ' ' . http_response_code() . ' ' . $image_meta['type'] . '' . PHP_EOL;
 
 		if (!fwrite($fpointer, $fdata)) { throw new ErrorException( 'fwrite error.' ); };
 	} catch (Exception $e) {
@@ -254,6 +254,18 @@ try {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
 	}
 	
+	try {
+		$fpointer = fopen('access'.'.log', 'a');
+		$fdata = '';
+		$fdata_item = [];
+		$fdata_item['time'] = date('Y/m/d H:i:s T');
+		$fdata_item['addr'] = $_SERVER['REMOTE_ADDR'];
+		$fdata = '' . $fdata_item['time'] . ' ' . $fdata_item['addr'] . ' ' . http_response_code() . ' ' . $image_meta['type'] . '' . PHP_EOL;
+
+		if (!fwrite($fpointer, $fdata)) { throw new ErrorException( 'fwrite error.' ); };
+	} catch (Exception $e) {
+	}
+
 	echo json_encode($exitStatus->getExitStatus(), $json_encode_option);
 	if ( !DEBUG ) {
 		$exitStatus->setVal('text', $exitStatus->getVal('text') . '#' . __LINE__);
