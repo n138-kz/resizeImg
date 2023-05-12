@@ -168,19 +168,12 @@ if ( !file_exists($_FILES['image']['tmp_name']) ) {
 }
 
 try {
-	$fpointer = fopen(pathinfo(__FILE__)['filename'].'.log', 'a');
-	$fdata = '';
-	if (!fwrite($fpointer, $fdata)) { throw new ErrorException( 'fwrite error.' ); };
-} catch (Exception $e) {
-}
-
-try {
 	$image_meta['name'] = $_FILES['image']['name'];
 	$image_meta['tmp_name'] = $_FILES['image']['tmp_name'];
 	$image_meta['type'] = $_FILES['image']['type'];
 	$image_meta['size']['bytes'] = $_FILES['image']['size'];
 	$image_meta['size']['req_w'] = $exitStatus->getVal('size')['width'];
-	$image_meta['size']['req_h'] = $exitStatus->getVal('size')['height'];;
+	$image_meta['size']['req_h'] = $exitStatus->getVal('size')['height'];
 	if( isset($_POST['size_w']) && is_float($_POST['size_w']) && $_POST['size_w'] >= 0 ){
 		$image_meta['size']['req_w'] = (float)($_POST['size_w']);
 	}
@@ -240,6 +233,18 @@ try {
 	imagepng($image);
 	imagedestroy($baseImage);
 	imagedestroy($image);
+
+	try {
+		$fpointer = fopen(pathinfo(__FILE__)['filename'].'.log', 'a');
+		$fdata = '';
+		$fdata_item = [];
+		$fdata_item['time'] = date('Y/m/d H:i:s T');
+		$fdata_item['addr'] = $_SERVER['REMOTE_ADDR'];
+		$fdata = '' . $fdata_item['time'] . ' ' . $fdata_item['addr'] . '';
+
+		if (!fwrite($fpointer, $fdata)) { throw new ErrorException( 'fwrite error.' ); };
+	} catch (Exception $e) {
+	}
 
 } catch (Exception $e) {
 	http_response_code(400);
