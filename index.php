@@ -176,8 +176,14 @@ try {
 
 try {
 	$image_meta = [
-		'type' => [],
-		'size' => [],
+		'type' => [
+			'bin' => 0,
+			'text' => '',
+		],
+		'size' => [
+			'dst_w' => 0,
+			'dst_h' => 0,
+		],
 		'name' => '',
 	];
 	$image_meta['name'] = $_FILES['image']['name'];
