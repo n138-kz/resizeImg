@@ -204,25 +204,25 @@ try {
 	}
 	$exitStatus->setVal('size', [ 'width'=>$image_meta['size']['req_w'], 'height'=>$image_meta['size']['req_h'] ]);
 
-	list($image_meta['size']['src_w'], $image_meta['size']['src_h'], $image_meta['type']['bin']) = getimagesize($_FILES['image']['tmp_name']);
+	list($image_meta['size']['src_w'], $image_meta['size']['src_h'], $image_meta['type']) = getimagesize($_FILES['image']['tmp_name']);
 	$image_meta['size']['dst_w'] = $image_meta['size']['src_w'] * $image_meta['size']['req_w'];
 	$image_meta['size']['dst_h'] = $image_meta['size']['src_h'] * $image_meta['size']['req_h'];
 	$image_meta['size']['b'] = $_FILES['image']['size'];
 	$image_meta['size']['kb'] = $image_meta['size']['b']/1000;
 	$image_meta['size']['mb'] = $image_meta['size']['kb']/1000;
 	$baseImage = NULL;
-	switch ($image_meta['type']['bin']) {
+	switch ($image_meta['type']) {
 		case IMAGETYPE_JPEG:
 			$baseImage = imagecreatefromjpeg($_FILES['image']['tmp_name']);
-			$image_meta['type']['text'] = 'JPEG';
+			$image_meta['type'] = 'JPEG';
 			break;
 		case IMAGETYPE_PNG:
 			$baseImage = imagecreatefrompng($_FILES['image']['tmp_name']);
-			$image_meta['type']['text'] = 'PNG';
+			$image_meta['type'] = 'PNG';
 			break;
 		case IMAGETYPE_GIF:
 			$baseImage = imagecreatefromgif($_FILES['image']['tmp_name']);
-			$image_meta['type']['text'] = 'GIF';
+			$image_meta['type'] = 'GIF';
 			break;
 		default:
 			if ( DEBUG ) {
