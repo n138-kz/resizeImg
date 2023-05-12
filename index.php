@@ -204,7 +204,7 @@ try {
 			break;
 		default:
 			if ( DEBUG ) {
-				throw new ErrorException( 'Out of format.' . json_encode($image_meta, JSON_PRETTY_PRINT) );
+				throw new ErrorException( 'Out of format.' . json_encode($image_meta) );
 			}
 			throw new ErrorException( 'Out of format.' );
 			break;
