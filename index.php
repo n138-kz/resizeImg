@@ -200,7 +200,10 @@ try {
 			$baseImage = imagecreatefromgif($_FILES['image']['tmp_name']);
 			break;
 		default:
-			throw new ErrorException('Out of format.' . $image_meta['type']);
+			if ( DEBUG ) {
+				throw new ErrorException( 'Out of format.' . json_encode($image_meta, JSON_PRETTY_PRINT) );
+			}
+			throw new ErrorException( 'Out of format.' );
 			break;
 	}
 	$image = imagecreatetruecolor($image_meta['size']['dst_w'], $image_meta['size']['dst_h']);
