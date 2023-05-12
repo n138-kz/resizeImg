@@ -168,6 +168,10 @@ if ( !file_exists($_FILES['image']['tmp_name']) ) {
 }
 
 try {
+	$image_meta['name'] = $_FILES['image']['name'];
+	$image_meta['tmp_name'] = $_FILES['image']['tmp_name'];
+	$image_meta['type'] = $_FILES['image']['type'];
+	$image_meta['size']['bytes'] = $_FILES['image']['size'];
 	$image_meta['size']['req_w'] = $exitStatus->getVal('size')['width'];
 	$image_meta['size']['req_h'] = $exitStatus->getVal('size')['height'];;
 	if( isset($_POST['size_w']) && is_float($_POST['size_w']) && $_POST['size_w'] >= 0 ){
