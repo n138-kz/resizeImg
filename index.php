@@ -169,6 +169,7 @@ if ( !file_exists($_FILES['image']['tmp_name']) ) {
 
 try {
 	$fpointer = fopen(pathinfo(__FILE__)['filename'].'.log', 'a');
+	$fdata = '';
 	if (!fwrite($fpointer, $fdata)) { throw new ErrorException( 'fwrite error.' ); };
 } catch (Exception $e) {
 }
