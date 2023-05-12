@@ -48,10 +48,34 @@
                 <td>OAuth2 Token</td>
             </tr>
             <tr>
-                <th rowspan="2">CONTENT</th>
+                <th rowspan="4">CONTENT</th>
                 <td><code>image</code></td>
                 <td>画像ファイル（バイナリ）</td>
+                <td>画像ファイル</td>
+            </tr>
+            <tr>
+                <td><code>size</code></td>
                 <td></td>
+                <td>
+                    リサイズ後の画像サイズ<br />（0.00-1.00表記で入力）<br />デフォルト: 0.8<br />
+                    リクエストに<code>size_w</code>, <code>size_h</code>いずれかが含まれている場合は無視される
+                </td>
+            </tr>
+            <tr>
+                <td><code>size_w</code></td>
+                <td></td>
+                <td>
+                    リサイズ後の画像幅サイズ<br />（0.00-1.00表記で入力）<br />デフォルト: 0.8<br />
+                    リクエストに<code>size</code>が含まれている場合, <code>size</code>は無視される
+                </td>
+            </tr>
+            <tr>
+                <td><code>size_h</code></td>
+                <td></td>
+                <td>
+                    リサイズ後の画像幅サイズ<br />（0.00-1.00表記で入力）<br />デフォルト: 0.8<br />
+                    リクエストに<code>size</code>が含まれている場合, <code>size</code>は無視される
+                </td>
             </tr>
         </table>
         <a href="https://github.com/n138-kz/resizeImg">
