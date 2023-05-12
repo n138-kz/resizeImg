@@ -12,6 +12,10 @@ class n138 {
 				'address' => '',
 			],
 			'debug' => FALSE,
+			'size' => [
+				'width' => 0.8,
+				'height' => 0.8,
+			],
 		];
 	}
 	function getExitStatus() {
@@ -164,9 +168,23 @@ if ( !file_exists($_FILES['image']['tmp_name']) ) {
 }
 
 try {
+	$image_meta['size']['req_w'] = $exitStatus->getVal('size')['width'];
+	$image_meta['size']['req_h'] = $exitStatus->getVal('size')['height'];;
+	if( isset($_POST['size_w']) && is_float($_POST['size_w']) && $_POST['size_w'] >= 0 ){
+		$image_meta['size']['req_w'] = (float)($_POST['size_w']);
+	}
+	if( isset($_POST['size_h']) && is_float($_POST['size_h']) && $_POST['size_h'] >= 0 ){
+		$image_meta['size']['req_h'] = (float)($_POST['size_h']);
+	}
+	if( isset($_POST['size']) ){
+		$image_meta['size']['req_w'] = (float)($_POST['size']);
+		$image_meta['size']['req_h'] = (float)($_POST['size']);
+	}
+	$exitStatus->setVal('size', [ 'width'=>$image_meta['size']['req_w'], 'height'=>$image_meta['size']['req_h'] ]);
+
 	list($image_meta['size']['src_w'], $image_meta['size']['src_h'], $image_meta['type']) = getimagesize($_FILES['image']['tmp_name']);
-	$image_meta['size']['dst_w'] = $image_meta['size']['src_w'] *0.8;
-	$image_meta['size']['dst_h'] = $image_meta['size']['src_h'] *0.8;
+	$image_meta['size']['dst_w'] = $image_meta['size']['src_w'] * $image_meta['size']['req_w'];
+	$image_meta['size']['dst_h'] = $image_meta['size']['src_h'] * $image_meta['size']['req_h'];
 	$image_meta['size']['b'] = $_FILES['image']['size'];
 	$image_meta['size']['kb'] = $image_meta['size']['b']/1000;
 	$image_meta['size']['mb'] = $image_meta['size']['kb']/1000;
