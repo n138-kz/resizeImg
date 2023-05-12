@@ -175,17 +175,6 @@ try {
 }
 
 try {
-	$image_meta = [
-		'type' => [
-			'bin' => 0,
-			'text' => '',
-		],
-		'size' => [
-			'dst_w' => 0,
-			'dst_h' => 0,
-		],
-		'name' => '',
-	];
 	$image_meta['name'] = $_FILES['image']['name'];
 	$image_meta['tmp_name'] = $_FILES['image']['tmp_name'];
 	$image_meta['type'] = $_FILES['image']['type'];
