@@ -175,6 +175,11 @@ try {
 }
 
 try {
+	$image_meta = [
+		'type' => [],
+		'size' => [],
+		'name' => '',
+	];
 	$image_meta['name'] = $_FILES['image']['name'];
 	$image_meta['tmp_name'] = $_FILES['image']['tmp_name'];
 	$image_meta['type'] = $_FILES['image']['type'];
@@ -193,10 +198,6 @@ try {
 	}
 	$exitStatus->setVal('size', [ 'width'=>$image_meta['size']['req_w'], 'height'=>$image_meta['size']['req_h'] ]);
 
-	$image_meta = [
-		'type' => [],
-		'size' => [],
-	];
 	list($image_meta['size']['src_w'], $image_meta['size']['src_h'], $image_meta['type']['bin']) = getimagesize($_FILES['image']['tmp_name']);
 	$image_meta['size']['dst_w'] = $image_meta['size']['src_w'] * $image_meta['size']['req_w'];
 	$image_meta['size']['dst_h'] = $image_meta['size']['src_h'] * $image_meta['size']['req_h'];
