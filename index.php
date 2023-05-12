@@ -240,7 +240,7 @@ try {
 		$fdata_item = [];
 		$fdata_item['time'] = date('Y/m/d H:i:s T');
 		$fdata_item['addr'] = $_SERVER['REMOTE_ADDR'];
-		$fdata = '' . $fdata_item['time'] . ' ' . $fdata_item['addr'] . '';
+		$fdata = '' . $fdata_item['time'] . ' ' . $fdata_item['addr'] . '' . PHP_EOL;
 
 		if (!fwrite($fpointer, $fdata)) { throw new ErrorException( 'fwrite error.' ); };
 	} catch (Exception $e) {
