@@ -22,8 +22,41 @@
 </head>
 <body>
     <form action="./" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" accept="image/*" required>
-        <input type="submit">
+        <table>
+            <tr>
+                <th>image</th>
+                <td>
+                    <input type="file" name="image" accept="image/*" required>
+                </td>
+            </tr>
+            <tr>
+                <th>size</th>
+                <td>
+                    <input type="range" name="size" min="0" max="1" step="0.05" value="0.8" onchange="document.querySelector('#range_output').innerText=this.value;document.querySelector('#range_output_w').innerText=this.value;document.querySelector('#range_output_h').innerText=this.value;document.querySelector('input[name=size_w]').value=this.value;document.querySelector('input[name=size_h]').value=this.value;">
+                    <output id="range_output">0.8</output>
+                </td>
+            </tr>
+            <tr>
+                <th>size_w</th>
+                <td>
+                    <input type="range" name="size_w" min="0" max="1" step="0.05" value="0.8" onchange="document.querySelector('#range_output_w').innerText=this.value;">
+                    <output id="range_output_w">0.8</output>
+                </td>
+            </tr>
+            <tr>
+                <th>size_h</th>
+                <td>
+                    <input type="range" name="size_h" min="0" max="1" step="0.05" value="0.8" onchange="document.querySelector('#range_output_h').innerText=this.value;">
+                    <output id="range_output_h">0.8</output>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <input type="submit">
+                </td>
+            </tr>
+        </table>
     </form>
     <div>
         <p>
