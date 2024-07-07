@@ -1,4 +1,5 @@
-# resizeImg
+# [resizeImg](https://github.com/n138-kz/resizeImg)
+
 > ファイルの解像度を80%にしファイルサイズを小さくする
 
 # 関連
